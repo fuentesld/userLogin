@@ -18,8 +18,15 @@ export const UserForm = () => {
       [name]: value,
     })
   }
+
+  const onSubmit = (event) => {
+    event.preventDefault()
+    console.log('enviando formulario');
+    //todo Guadar datos de usuario
+    setUserForm(initialUserForm)
+  }
   return (<>
-    <form action="">
+    <form onSubmit = {onSubmit}>
       <input 
         type="text" 
         className="form-control my-3 w-75"
