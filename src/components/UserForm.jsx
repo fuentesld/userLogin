@@ -1,4 +1,5 @@
 import { useState } from "react"
+import PropTypes from "prop-types"
 
 const initialUserForm = {
   username: '',
@@ -6,7 +7,7 @@ const initialUserForm = {
   email: ''
 }
 
-export const UserForm = () => {
+export const UserForm = ({handlerAddUser}) => {
 
   const [userForm, setUserForm] = useState(initialUserForm)
   const {username, password, email} = userForm
@@ -25,8 +26,8 @@ export const UserForm = () => {
       alert('Debe rellenar todos los campos del formulario')
       return
     }
-    console.log('enviando formulario');
-    //todo Guadar datos de usuario
+    
+    handlerAddUser(userForm)
     setUserForm(initialUserForm)
   }
   return (<>
@@ -61,4 +62,8 @@ export const UserForm = () => {
       </button>
     </form>
   </>)
+}
+
+UserForm.propTypes = {
+  handlerAddUser: PropTypes.func.isRequired,
 }
