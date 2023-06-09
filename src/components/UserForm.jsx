@@ -21,6 +21,10 @@ export const UserForm = () => {
 
   const onSubmit = (event) => {
     event.preventDefault()
+    if (!username || !password || !email) {
+      alert('Debe rellenar todos los campos del formulario')
+      return
+    }
     console.log('enviando formulario');
     //todo Guadar datos de usuario
     setUserForm(initialUserForm)
