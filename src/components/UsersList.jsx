@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import UserRow from './UserRow'
 
-export const UsersList = ({users, handlerRemoveUser}) => {
+export const UsersList = ({users, handlerRemoveUser, handlerUserSelectedForm}) => {
   return (<>
       <table className="table table-hover table striped">
         <thead>
@@ -15,13 +15,15 @@ export const UsersList = ({users, handlerRemoveUser}) => {
         </thead>
         <tbody>
           {
-            users.map(({id, username, email}) => (
+            users.map(({id, username, email, password}) => (
                 <UserRow 
                   key = {id} 
                   id = {id}
                   username = {username}
                   email={email}
+                  password={password}
                   handlerRemoveUser ={handlerRemoveUser}
+                  handlerUserSelectedForm = {handlerUserSelectedForm}
                 />
               )
             )
@@ -34,5 +36,6 @@ export const UsersList = ({users, handlerRemoveUser}) => {
 
 UsersList.propTypes = {
   users: PropTypes.array.isRequired,
-  handlerRemoveUser: PropTypes.func.isRequired
+  handlerRemoveUser: PropTypes.func.isRequired,
+  handlerUserSelectedForm: PropTypes.func.isRequired
 }

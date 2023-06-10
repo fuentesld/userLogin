@@ -1,16 +1,15 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 
-const initialUserForm = {
-  username: '',
-  password: '',
-  email: ''
-}
-
-export const UserForm = ({handlerAddUser}) => {
+export const UserForm = ({handlerAddUser, initialUserForm, userSelected}) => {
 
   const [userForm, setUserForm] = useState(initialUserForm)
-  const {username, password, email} = userForm
+  const {id, username, password, email} = userForm
+
+  useEffect(() => {
+    setUserForm({...userSelected})
+  }, [userSelected])
+  
 
   const onInputChange = ({target}) => {
     const {name, value} = target
@@ -32,6 +31,11 @@ export const UserForm = ({handlerAddUser}) => {
   }
   return (<>
     <form onSubmit = {onSubmit}>
+      <input 
+        type="hidden"
+        name="id"
+        value={id}
+      />
       <input 
         type="text" 
         className="form-control my-3 w-75"
@@ -58,7 +62,10 @@ export const UserForm = ({handlerAddUser}) => {
       />
       <button className="btn btn-primary" 
         type="submit">
-          Crear
+          {id === 0
+            ? 'Crear'
+            : 'Editar'}
+          
       </button>
     </form>
   </>)
@@ -66,4 +73,6 @@ export const UserForm = ({handlerAddUser}) => {
 
 UserForm.propTypes = {
   handlerAddUser: PropTypes.func.isRequired,
+  initialUserForm: PropTypes.object.isRequired,
+  userSelected: PropTypes.object.isRequired
 }
