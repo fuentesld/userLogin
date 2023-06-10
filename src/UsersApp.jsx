@@ -1,5 +1,7 @@
+import { useReducer } from "react"
 import { UserForm } from "./components/UserForm"
 import { UsersList } from "./components/UsersList"
+import { usersReducer } from "./reducers/usersReducer"
 
 const initialUsers =[
   {
@@ -12,8 +14,22 @@ const initialUsers =[
 
 export const UsersApp = () => {
 
+  const [users, distpatch] = useReducer(usersReducer, initialUsers)
+
   const handlerAddUser = (user)=>{
-    console.log(`Usuario añadido ${user.username}`);
+    distpatch(
+      {
+        type: 'addUser',
+        payload: user
+      }
+    )
+  }
+
+  const handlerRemoveUser = (id) => {
+    distpatch({
+      type: 'removeUser',
+      payload: id,
+    })
   }
   
   return (
@@ -29,7 +45,8 @@ export const UsersApp = () => {
 
         <div className="col">
           <UsersList 
-            users = {initialUsers}
+            users = {users}
+            handlerRemoveUser = { handlerRemoveUser } 
           />
         </div>
 

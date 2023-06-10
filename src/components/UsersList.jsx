@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import UserRow from './UserRow'
 
-export const UsersList = ({users}) => {
+export const UsersList = ({users, handlerRemoveUser}) => {
   return (<>
       <table className="table table-hover table striped">
         <thead>
@@ -20,7 +20,9 @@ export const UsersList = ({users}) => {
                   key = {id} 
                   id = {id}
                   username = {username}
-                  email={email}/>
+                  email={email}
+                  handlerRemoveUser ={handlerRemoveUser}
+                />
               )
             )
           }
@@ -31,5 +33,6 @@ export const UsersList = ({users}) => {
 }
 
 UsersList.propTypes = {
-  users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
+  handlerRemoveUser: PropTypes.func.isRequired
 }
