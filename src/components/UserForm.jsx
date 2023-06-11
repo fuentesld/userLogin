@@ -7,7 +7,11 @@ export const UserForm = ({handlerAddUser, initialUserForm, userSelected}) => {
   const {id, username, password, email} = userForm
 
   useEffect(() => {
-    setUserForm({...userSelected})
+    setUserForm(
+      {
+        ...userSelected,
+        password: ''
+      })
   }, [userSelected])
   
 
@@ -21,7 +25,7 @@ export const UserForm = ({handlerAddUser, initialUserForm, userSelected}) => {
 
   const onSubmit = (event) => {
     event.preventDefault()
-    if (!username || !password || !email) {
+    if (!username || (!password && id === 0) || !email) {
       alert('Debe rellenar todos los campos del formulario')
       return
     }
@@ -44,14 +48,17 @@ export const UserForm = ({handlerAddUser, initialUserForm, userSelected}) => {
         name="username" 
         onChange={onInputChange}
       />
-      <input 
-        type="password" 
-        className="form-control my-3 w-75"
-        placeholder="Password"
-        value= {password}
-        name="password" 
-        onChange={onInputChange}
-      />
+      {id > 0
+            || <input 
+            type="password" 
+            className="form-control my-3 w-75"
+            placeholder="Password"
+            value= {password}
+            name="password" 
+            onChange={onInputChange}
+          />
+      }
+      
       <input 
         type="email" 
         className="form-control my-3 w-75"

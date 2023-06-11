@@ -32,6 +32,7 @@ export const UsersApp = () => {
         payload: user
       }
     )
+    // console.log(user);
   }
 
   const handlerRemoveUser = (id) => {
@@ -42,7 +43,7 @@ export const UsersApp = () => {
   }
 
   const handlerUserSelectedForm = (user) => {
-    console.log(user);
+    // console.log(user);
     setUserSelected({...user})
   }
   

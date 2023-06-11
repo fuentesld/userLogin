@@ -1,7 +1,7 @@
 // import React from 'react'
 import PropTypes from 'prop-types'
 
-const UserRow = ({id, username, email, password, handlerRemoveUser, handlerUserSelectedForm }) => {
+const UserRow = ({id, username, email, handlerRemoveUser, handlerUserSelectedForm }) => {
 
   return (
     <tr>
@@ -16,7 +16,6 @@ const UserRow = ({id, username, email, password, handlerRemoveUser, handlerUserS
             id,
             username,
             email, 
-            password
           })}>
           Editar
         </button>
@@ -38,7 +37,6 @@ UserRow.propTypes = {
   id:PropTypes.number.isRequired,
   username:PropTypes.string.isRequired,
   email:PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
   handlerRemoveUser: PropTypes.func.isRequired,
   handlerUserSelectedForm: PropTypes.func.isRequired,
 }
