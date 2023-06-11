@@ -1,5 +1,6 @@
 import { useReducer, useState } from "react"
 import { usersReducer } from "../reducers/usersReducer"
+import Swal from "sweetalert2"
 
 const initialUsers =[
   {
@@ -30,12 +31,39 @@ export const useUsers = () => {
         payload: user
       }
     )
+    Swal.fire(
+      (user.id===0 ) 
+        ? 'Usuario Creado'
+        : 'Usuario Actualizado',
+      (user.id===0 ) 
+        ? 'El usuario ha sido creado con exito'
+        : 'El usuario ha sido actualizado correctamente',
+      'success'
+    )
   }
 
   const handlerRemoveUser = (id) => {
-    distpatch({
-      type: 'removeUser',
-      payload: id,
+    Swal.fire({
+      title: 'Esta seguro que desea eliminar?',
+      text: 'No podra revertir esta operación!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar!'
+    }).then((result) => {
+      
+      if (result.isConfirmed) {
+        distpatch({
+          type: 'removeUser',
+          payload: id,
+        })
+        Swal.fire(
+          'Usuario Eliminado!',
+          'El usuario ha sido eliminado con exito.',
+          'success'
+        )
+      }
     })
   }
 

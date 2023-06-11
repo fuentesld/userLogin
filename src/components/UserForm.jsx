@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import PropTypes from "prop-types"
+import Swal from "sweetalert2"
 
 export const UserForm = ({handlerAddUser, initialUserForm, userSelected}) => {
 
@@ -26,7 +27,11 @@ export const UserForm = ({handlerAddUser, initialUserForm, userSelected}) => {
   const onSubmit = (event) => {
     event.preventDefault()
     if (!username || (!password && id === 0) || !email) {
-      alert('Debe rellenar todos los campos del formulario')
+      Swal.fire(
+        'Error de validación',
+        'Debe completar todos los campos del formulario',
+        'error'
+      )
       return
     }
     
