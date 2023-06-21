@@ -1,43 +1,40 @@
-import { UserForm } from "./components/UserForm"
-import { UsersList } from "./components/UsersList"
-import { useUsers } from "./hooks/useUsers"
+// import { UserForm } from "./components/UserForm"
+import { UsersPage } from "./pages/UsersPage"
+import {LoginPage} from "./auth/pages/LoginPage"
+import { useReducer } from "react"
+import { loginReducer } from "./auth/reducers/loginReducer"
+import Swal from 'sweetalert2'
 
+const initialLogin = JSON.parse(sessionStorage.getItem('login'))|| 
+        {
+          isAuth: false,
+          user:undefined
+        }
 export const UsersApp = () => {
-  const {
-    initialUserForm,
-    users, 
-    userSelected, 
-    handlerAddUser, 
-    handlerRemoveUser, 
-    handlerUserSelectedForm 
-  } = useUsers()
- 
+  const [login, dispatch] = useReducer(loginReducer, initialLogin)
 
-  
-  return (
-    <div className="container my-4">
-      <h2>Users App</h2>
-      <div className="row">
+  const handlerLogin = ({username, password}) => {
+    console.log(username);
+    if(username === 'admin' && password === '12345'){
+      const user = {username: 'admin'}
+      dispatch({
+        type: 'login',
+        payload: user,
+      })
+      sessionStorage.setItem(
+        'login', 
+        JSON.stringify({isAuth:true, user}))
+    } else {
+      Swal.fire('Error de Validación', 'Username y password requerido', 'error')
 
-        <div className="col">
-          <UserForm
-            initialUserForm={ initialUserForm }
-            handlerAddUser = { handlerAddUser }
-            userSelected={ userSelected }
-          />
-        </div>
+    }
+  }
 
-        <div className="col">
-          {users.length === 0 
-            ? <div className="alert alert-warning">No hay usuarios en el sistema</div>
-            : <UsersList 
-                users = {users}
-                handlerRemoveUser = { handlerRemoveUser }
-                handlerUserSelectedForm = {handlerUserSelectedForm}/>
-          }
-        </div>
 
-      </div>
-    </div>
-  )
+  return (<>
+    {login.isAuth 
+      ? <UsersPage /> 
+      : <LoginPage handlerLogin = {handlerLogin}/>}
+    
+  </>)
 }

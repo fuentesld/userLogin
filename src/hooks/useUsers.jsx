@@ -22,6 +22,7 @@ export const useUsers = () => {
   
   const [users, distpatch] = useReducer(usersReducer, initialUsers)
   const [userSelected, setUserSelected] = useState(initialUserForm)
+  const [visibleForm, setVisibleForm] = useState(false)
 
   const handlerAddUser = (user)=>{
     
@@ -40,6 +41,7 @@ export const useUsers = () => {
         : 'El usuario ha sido actualizado correctamente',
       'success'
     )
+    handlerCloseForm()
   }
 
   const handlerRemoveUser = (id) => {
@@ -68,16 +70,29 @@ export const useUsers = () => {
   }
 
   const handlerUserSelectedForm = (user) => {
+    setVisibleForm(true)
     setUserSelected({...user})
+  }
+
+  const handlerOpenForm = () => {
+    setVisibleForm(true)
+  }
+
+  const handlerCloseForm = () => {
+    setVisibleForm(false)
+    setUserSelected(initialUserForm)
   }
   
   return {
     initialUserForm,
     users, 
     userSelected, 
+    visibleForm,
 
     handlerAddUser, 
     handlerRemoveUser, 
-    handlerUserSelectedForm 
+    handlerUserSelectedForm,
+    handlerOpenForm,
+    handlerCloseForm,
   }
 }
