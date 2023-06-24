@@ -1,22 +1,36 @@
-// import { UserForm } from "./components/UserForm"
-import { UsersPage } from "./pages/UsersPage"
+import {Navigate, Routes, Route} from 'react-router-dom'
 import { LoginPage } from "./auth/pages/LoginPage"
-import { Navbar } from "./components/layout/Navbar"
 import { useAuth } from "./auth/hooks/UseAuth"
+import { UserRoutes } from './routes/UserRoutes'
 
 
 export const UsersApp = () => {
   const {login, handlerLogin, handlerLogout} = useAuth()
-
-
-  return (<>
-    {login.isAuth 
-      ? (<>
-          <Navbar handlerLogout = {handlerLogout}
-              login = {login}/>
-          <UsersPage />
-        </>) 
-      : <LoginPage handlerLogin = {handlerLogin}/>}
+  return(
     
-  </>)
+      <Routes>
+        {
+          login.isAuth
+          ? <Route 
+              path="/*" 
+              element={<UserRoutes 
+                          login={login} 
+                          handlerLogout={handlerLogout}/>} 
+            />
+          : <>
+              <Route 
+                path='/login'
+                element={<LoginPage 
+                          handlerLogin={handlerLogin}/>}/>
+              <Route 
+                path='/*'
+                element={<Navigate to="/login"/>} />
+            </>
+            
+          }
+      </Routes>
+    
+  )
+  
+    
 }
