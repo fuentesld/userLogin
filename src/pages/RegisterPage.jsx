@@ -1,14 +1,28 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import {useParams} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { UserForm } from '../components/UserForm'
 
 
-export const RegisterPage = ({handlerAddUser, initialUserForm}) => {
+export const RegisterPage = ({ users=[],handlerAddUser, initialUserForm}) => {
   const [userSelected, setUserSelected] = useState(initialUserForm)
-  // setUserSelected(initialUserForm)
+  const {id} = useParams()
+  const user = users.find(u => u.id == id) || initialUserForm
+  
+  useEffect(() => {
+    setUserSelected(user)
+  }, [user])
+  
+  
   return (
     <div className='container my-4'>
-        <h4>Registro de usuarios</h4>
+
+        <h4>{userSelected.id > 0
+              ?'Editar'
+              :'Registrar'} 
+              Usuario
+        </h4>
+
         <div className="row">
           <div className="col">
             <UserForm 
@@ -23,6 +37,7 @@ export const RegisterPage = ({handlerAddUser, initialUserForm}) => {
 }
 
 RegisterPage.propTypes = {
+  users:PropTypes.array,
   handlerAddUser: PropTypes.func.isRequired,
   initialUserForm: PropTypes.object.isRequired,
 }
