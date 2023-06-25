@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import PropTypes from 'prop-types'
 import { UserForm } from '../components/UserForm'
 
 
-export const RegisterPage = ({handlerAddUser, initiaUserForm}) => {
-  const [userSelected, setUserSelected] = useState(initiaUserForm)
+export const RegisterPage = ({handlerAddUser, initialUserForm}) => {
+  const [userSelected, setUserSelected] = useState(initialUserForm)
+  // setUserSelected(initialUserForm)
   return (
     <div className='container my-4'>
         <h4>Registro de usuarios</h4>
@@ -12,10 +14,15 @@ export const RegisterPage = ({handlerAddUser, initiaUserForm}) => {
             <UserForm 
               userSelected = {userSelected}
               handlerAddUser={handlerAddUser} 
-              initialUserForm={initiaUserForm}
+              initialUserForm={initialUserForm}
             />
           </div>
         </div>
     </div>
   )
+}
+
+RegisterPage.propTypes = {
+  handlerAddUser: PropTypes.func.isRequired,
+  initialUserForm: PropTypes.object.isRequired,
 }

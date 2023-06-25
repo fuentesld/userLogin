@@ -84,19 +84,22 @@ export const UserForm = ({handlerAddUser, handlerCloseForm, initialUserForm, use
             : 'Editar'}
           
       </button>
-      <button 
-        className="btn btn-primary mx-2" 
-        type="button"
-        onClick={onCloseForm}>
-        Cerrar
-      </button>
+
+      {!handlerCloseForm 
+        ||  <button 
+              className="btn btn-primary mx-2" 
+              type="button"
+              onClick={onCloseForm}>
+              Cerrar
+            </button>}
+      
     </form>
   </>)
 }
 
 UserForm.propTypes = {
   handlerAddUser: PropTypes.func.isRequired,
-  handlerCloseForm: PropTypes.func.isRequired,
+  handlerCloseForm: PropTypes.func,
   initialUserForm: PropTypes.object.isRequired,
   userSelected: PropTypes.object.isRequired
 }

@@ -1,19 +1,19 @@
+import PropTypes from "prop-types"
 import { UserModalForm } from "../components/UserModalForm"
 import { UsersList } from "../components/UsersList"
-import { useUsers } from "../hooks/useUsers"
 
-export const UsersPage = () => {
-  const {
-    initialUserForm,
-    users, 
-    userSelected, 
-    visibleForm,
-    handlerAddUser, 
-    handlerRemoveUser, 
-    handlerUserSelectedForm,
-    handlerOpenForm,
-    handlerCloseForm,
-  } = useUsers()
+export const UsersPage = ({
+  initialUserForm,
+  users, 
+  userSelected, 
+  visibleForm,
+  handlerAddUser, 
+  handlerRemoveUser, 
+  handlerUserSelectedForm,
+  handlerOpenForm,
+  handlerCloseForm,
+}) => {
+  
 
   
   return (<>
@@ -50,4 +50,16 @@ export const UsersPage = () => {
       </div>
     </div>
   </>)
+}
+
+UsersPage.propTypes = {
+  initialUserForm: PropTypes.object.isRequired,
+  users: PropTypes.array.isRequired,
+  userSelected: PropTypes.object.isRequired,
+  visibleForm: PropTypes.bool.isRequired,
+  handlerAddUser:PropTypes.func.isRequired,
+  handlerRemoveUser: PropTypes.func.isRequired,
+  handlerOpenForm:PropTypes.func.isRequired,
+  handlerUserSelectedForm: PropTypes.func.isRequired,
+  handlerCloseForm:PropTypes.func.isRequired,
 }
