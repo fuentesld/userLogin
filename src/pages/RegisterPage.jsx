@@ -8,11 +8,10 @@ export const RegisterPage = ({ users=[],handlerAddUser, initialUserForm}) => {
   const [userSelected, setUserSelected] = useState(initialUserForm)
   const {id} = useParams()
   const user = users.find(u => u.id == id) || initialUserForm
-  
+
   useEffect(() => {
-    setUserSelected(user)
+    if (user.id > 0) setUserSelected(user)
   }, [user])
-  
   
   return (
     <div className='container my-4'>
