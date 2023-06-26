@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import Swal from "sweetalert2"
+import { useContext } from "react"
+import { UserContext } from "../context/userContext"
 
-export const UserForm = ({handlerAddUser, handlerCloseForm, initialUserForm, userSelected}) => {
+export const UserForm = ({ userSelected, handlerCloseForm, }) => {
 
+  const {initialUserForm, handlerAddUser} = useContext(UserContext)
   const [userForm, setUserForm] = useState(initialUserForm)
   const {id, username, password, email} = userForm
 
@@ -98,8 +101,6 @@ export const UserForm = ({handlerAddUser, handlerCloseForm, initialUserForm, use
 }
 
 UserForm.propTypes = {
-  handlerAddUser: PropTypes.func.isRequired,
+  userSelected: PropTypes.object.isRequired,
   handlerCloseForm: PropTypes.func,
-  initialUserForm: PropTypes.object.isRequired,
-  userSelected: PropTypes.object.isRequired
 }

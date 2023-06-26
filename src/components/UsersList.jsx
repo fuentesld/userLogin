@@ -1,7 +1,10 @@
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import UserRow from './UserRow'
+import { useContext } from 'react'
+import { UserContext } from '../context/userContext'
 
-export const UsersList = ({users, handlerRemoveUser, handlerUserSelectedForm}) => {
+export const UsersList = () => {
+  const {users,}=useContext(UserContext)
   return (<>
       <table className="table table-hover table striped">
         <thead>
@@ -22,8 +25,6 @@ export const UsersList = ({users, handlerRemoveUser, handlerUserSelectedForm}) =
                   id = {id}
                   username = {username}
                   email={email}
-                  handlerRemoveUser ={handlerRemoveUser}
-                  handlerUserSelectedForm = {handlerUserSelectedForm}
                 />
               )
             )
@@ -34,8 +35,8 @@ export const UsersList = ({users, handlerRemoveUser, handlerUserSelectedForm}) =
   </>)
 }
 
-UsersList.propTypes = {
-  users: PropTypes.array.isRequired,
-  handlerRemoveUser: PropTypes.func.isRequired,
-  handlerUserSelectedForm: PropTypes.func.isRequired
-}
+// UsersList.propTypes = {
+//   users: PropTypes.array.isRequired,
+//   handlerRemoveUser: PropTypes.func.isRequired,
+//   handlerUserSelectedForm: PropTypes.func.isRequired
+// }

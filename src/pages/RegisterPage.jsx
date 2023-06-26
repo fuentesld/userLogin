@@ -1,11 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import {useParams} from 'react-router-dom'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { UserForm } from '../components/UserForm'
+import { UserContext } from '../context/userContext'
 
 
-export const RegisterPage = ({ users=[],handlerAddUser, initialUserForm}) => {
+export const RegisterPage = () => {
+  const { users=[], initialUserForm, } = useContext(UserContext)
   const [userSelected, setUserSelected] = useState(initialUserForm)
+
   const {id} = useParams()
   const user = users.find(u => u.id == id) || initialUserForm
 
@@ -26,8 +29,6 @@ export const RegisterPage = ({ users=[],handlerAddUser, initialUserForm}) => {
           <div className="col">
             <UserForm 
               userSelected = {userSelected}
-              handlerAddUser={handlerAddUser} 
-              initialUserForm={initialUserForm}
             />
           </div>
         </div>
@@ -35,8 +36,8 @@ export const RegisterPage = ({ users=[],handlerAddUser, initialUserForm}) => {
   )
 }
 
-RegisterPage.propTypes = {
-  users:PropTypes.array,
-  handlerAddUser: PropTypes.func.isRequired,
-  initialUserForm: PropTypes.object.isRequired,
-}
+// RegisterPage.propTypes = {
+//   users:PropTypes.array,
+//   handlerAddUser: PropTypes.func.isRequired,
+//   initialUserForm: PropTypes.object.isRequired,
+// }
