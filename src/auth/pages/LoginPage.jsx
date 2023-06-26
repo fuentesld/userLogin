@@ -1,12 +1,14 @@
-import {useState} from "react"
 import Swal from 'sweetalert2'
-import PropTypes from 'prop-types'
+import {useContext, useState} from "react"
+import { AuthContext } from "../context/AuthContext"
 
 const initialLoginForm = {
   username: '',
   password: ''
 }
-export const LoginPage = ({handlerLogin}) => {
+export const LoginPage = () => {
+
+  const {handlerLogin} = useContext(AuthContext)
   
   const [loginForm, setLoginForm] = useState(initialLoginForm)
   const {username, password} = loginForm
@@ -71,6 +73,3 @@ export const LoginPage = ({handlerLogin}) => {
   )
 }
 
-LoginPage.propTypes = {
-  handlerLogin: PropTypes.func.isRequired
-}

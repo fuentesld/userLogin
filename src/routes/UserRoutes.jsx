@@ -1,20 +1,16 @@
-import PropTypes from 'prop-types'
 import {Navigate, Routes, Route} from 'react-router-dom'
 import { UsersPage } from '../pages/UsersPage'
 import { Navbar } from '../components/layout/Navbar'
 import { RegisterPage } from '../pages/RegisterPage'
-// import { useUsers } from '../hooks/useUsers'
 import { UserProvider } from '../context/UserProvider'
 
-export const UserRoutes = ({login, handlerLogout}) => {
+export const UserRoutes = () => {
   
 
   return (
     <>
       <UserProvider>
-        <Navbar 
-            login = {login}
-            handlerLogout = {handlerLogout} />
+        <Navbar />
             
         <Routes>
           <Route  
@@ -41,7 +37,3 @@ export const UserRoutes = ({login, handlerLogout}) => {
   )
 }
 
-UserRoutes.propTypes = {
-  login: PropTypes.object.isRequired,
-  handlerLogout: PropTypes.func.isRequired,
-}

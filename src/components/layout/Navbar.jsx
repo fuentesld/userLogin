@@ -1,7 +1,9 @@
-import PropTypes from 'prop-types'
+import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../../auth/context/AuthContext'
 
-export const Navbar = ({login, handlerLogout}) => {
+export const Navbar = () => {
+  const {login, handlerLogout} = useContext(AuthContext)
 
   return (
     <>
@@ -46,7 +48,3 @@ export const Navbar = ({login, handlerLogout}) => {
   )
 }
 
-Navbar.propTypes = {
-  login: PropTypes.object.isRequired,
-  handlerLogout: PropTypes.func.isRequired
-}
